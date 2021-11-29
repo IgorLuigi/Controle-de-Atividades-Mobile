@@ -1,22 +1,27 @@
 package com.example.aplicativoigor.adapter
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.aplicativoigor.model.Atividade
 import androidx.recyclerview.widget.RecyclerView
+import com.example.aplicativoigor.R
 import kotlinx.android.synthetic.main.layout_lista_atividades.view.*
 
 class AtividadesAdapter(var listaAtividades: ArrayList<Atividade>) : RecyclerView.Adapter<AtividadesAdapter.AtividadeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AtividadeViewHolder {
-        TODO("Not yet implemented")
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.layout_lista_atividades, parent, false)
+
+        return AtividadeViewHolder(itemView)
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return listaAtividades.size
     }
 
     override fun onBindViewHolder(holder: AtividadeViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val atividade = listaAtividades[position]
+        holder.bind(atividade)
     }
 
 
