@@ -71,6 +71,37 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:id="@+id/textViewPrioridadeAtividade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Prioridade da Atividade"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tilTipoAtividade"
+            android:layout_margin="8dp"
+            android:textStyle="bold"/>
+
+        <RatingBar
+            android:id="@+id/ratingBarPrioridadeAtividade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:isIndicator="false"
+            android:numStars="5"
+            android:rating="4"
+            android:stepSize="0.5"
+            app:layout_constraintTop_toBottomOf="@id/textViewPrioridadeAtividade"
+            app:layout_constraintRight_toRightOf="parent"
+            style="?android:attr/ratingBarStyleIndicator"/>
+
+        <CheckBox
+            android:id="@+id/checkboxZero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Zerado"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@id/ratingBarPrioridadeAtividade"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
