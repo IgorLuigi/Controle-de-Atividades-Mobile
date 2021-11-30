@@ -1,9 +1,10 @@
-package com.example.aplicativoigor
+package com.example.aplicativoigor.userInterface
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.aplicativoigor.R
 import com.example.aplicativoigor.adapter.AtividadesAdapter
 
 class MainActivity : AppCompatActivity() {
