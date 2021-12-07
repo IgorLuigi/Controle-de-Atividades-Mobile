@@ -8,6 +8,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.aplicativoigor.R
 import com.example.aplicativoigor.adapter.AtividadesAdapter
+import kotlinx.android.synthetic.main.toolbar.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -16,7 +17,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_main)
 
         iniciarRecyclerView()
-        
+
+        insertToolbar()
+
         buttonCadastrarAtividade.setOnClickListener(this)
     }
 
@@ -32,5 +35,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         recyclerViewAtividades.adapter = AtividadesAdapter(Datasource.getAtividades())
     }
 
-
+    private fun insertToolbar(){
+        setSupportActionBar(toolbar)
+        supportActionBar!!.title = "App Tasks"
+    }
 }
