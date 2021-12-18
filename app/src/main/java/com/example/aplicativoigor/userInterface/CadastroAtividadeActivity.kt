@@ -37,7 +37,9 @@ class CadastroAtividadeActivity : AppCompatActivity() {
                 alert()
             }
             R.id.menu_salvar -> {
-                Toast.makeText(this, "SALVAR", Toast.LENGTH_SHORT).show()
+                if (validarFormulario()){
+                    Toast.makeText(this, "Salvar", Toast.LENGTH_SHORT).show()
+                }
             }
             else -> {
                 onBackPressed()
@@ -45,6 +47,32 @@ class CadastroAtividadeActivity : AppCompatActivity() {
         }
 
         return true
+    }
+
+    private fun validarFormulario() : Boolean {
+
+        var valida = true
+
+        if (editTextDescricaoAtividade.length() < 1){
+            tilDescricaoAtividade.isErrorEnabled = true
+            tilDescricaoAtividade.error = "Descrição da atividade é obrigatória"
+            valida = false
+        } else {
+            tilDescricaoAtividade.isErrorEnabled = false
+            tilDescricaoAtividade.error = null
+        }
+
+
+        if (editTextTipoAtividade.length() < 1){
+            tilTipoAtividade.isErrorEnabled = true
+            tilTipoAtividade.error = "Descrição da atividade é obrigatória"
+            valida = false
+        } else {
+            tilTipoAtividade.isErrorEnabled = false
+            tilTipoAtividade.error = null
+        }
+
+        return valida
     }
 
     private fun alert(){
