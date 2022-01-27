@@ -20,10 +20,9 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper (context, DATABASE_NAM
         private const val CREATE_TABLE_ATIVIDADE = "CREATE TABLE ${DatabaseDefinition.Atividade.TABLE_NAME} (" +
                 "${DatabaseDefinition.Atividade.Columns.ID} INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "${DatabaseDefinition.Atividade.Columns.DESCRICAO} TEXT, " +
-                "${DatabaseDefinition.Atividade.Columns.DATA} TEXT, " +
                 "${DatabaseDefinition.Atividade.Columns.PRIORIDADE} REAL, " +
                 "${DatabaseDefinition.Atividade.Columns.TIPO_ATIVIDADE} TEXT, " +
-                "${DatabaseDefinition.Atividade.Columns.ZERADO} INTEGER);"
+                "${DatabaseDefinition.Atividade.Columns.FEITO} INTEGER);"
 
     }
 }

@@ -7,6 +7,8 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.aplicativoigor.R
+import com.example.aplicativoigor.model.Atividade
+import com.example.aplicativoigor.repository.AtividadeRepository
 import kotlinx.android.synthetic.main.activity_cadastro_atividade.*
 import kotlinx.android.synthetic.main.toolbar.*
 
@@ -38,7 +40,8 @@ class CadastroAtividadeActivity : AppCompatActivity() {
             }
             R.id.menu_salvar -> {
                 if (validarFormulario()){
-                    Toast.makeText(this, "Salvar", Toast.LENGTH_SHORT).show()
+                    salvarAtividade()
+
                 }
             }
             else -> {
@@ -47,6 +50,19 @@ class CadastroAtividadeActivity : AppCompatActivity() {
         }
 
         return true
+    }
+
+    private fun salvarAtividade() {
+         val atividade = Atividade(
+             descricao = editTextDescricaoAtividade.text.toString(),
+             prioridade = ratingBarPrioridadeAtividade.rating,
+             tipoAtividade = editTextTipoAtividade.text.toString(),
+             feito = checkboxZero.isChecked
+         )
+
+        val repo = AtividadeRepository(this)
+        val id = repo.save(atividade)
+        println("Registro criado: $id")
     }
 
     private fun validarFormulario() : Boolean {

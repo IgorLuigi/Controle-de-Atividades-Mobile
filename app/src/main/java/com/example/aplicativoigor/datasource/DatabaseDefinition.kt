@@ -8,10 +8,9 @@ class DatabaseDefinition {
         object Columns {
             const val ID = "id"
             const val DESCRICAO = "descricao"
-            const val DATA = "data"
             const val PRIORIDADE = "prioridade"
             const val TIPO_ATIVIDADE = "tipo_atividade"
-            const val ZERADO = "zerado"
+            const val FEITO = "feito"
         }
     }
 
