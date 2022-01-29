@@ -10,12 +10,19 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper (context, DATABASE_NAM
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        TODO("Not yet implemented")
+        //if (db != null) {
+            //db.execSQL("DROP TABLE IF EXISTS Atividade")
+           // onCreate(db)
+        //};
+
+        //if (db != null) {
+            //db.execSQL("DROP TABLE IF EXISTS Atividade")
+        //}
     }
 
     companion object {
         private const val DATABASE_NAME = "atividadebanco"
-        private const val DATABASE_VERSION = 1
+        private const val DATABASE_VERSION = 2
 
         private const val CREATE_TABLE_ATIVIDADE = "CREATE TABLE ${DatabaseDefinition.Atividade.TABLE_NAME} (" +
                 "${DatabaseDefinition.Atividade.Columns.ID} INTEGER PRIMARY KEY AUTOINCREMENT, " +

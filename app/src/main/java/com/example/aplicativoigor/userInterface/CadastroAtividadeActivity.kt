@@ -62,7 +62,29 @@ class CadastroAtividadeActivity : AppCompatActivity() {
 
         val repo = AtividadeRepository(this)
         val id = repo.save(atividade)
-        println("Registro criado: $id")
+
+        if(id > 0){
+            val builderDialog = AlertDialog.Builder(this)
+            builderDialog.setTitle("Sucesso!")
+            builderDialog.setMessage("Atividade cadastrada com sucesso!\n\n Deseja cadastrar uma nova atividade?")
+            builderDialog.setIcon(R.drawable.ic_done_green_24dp)
+
+            builderDialog.setPositiveButton("Sim") { _, _ ->
+                limparFormulario()
+            }
+            builderDialog.setNegativeButton("Não") { _, _ ->
+                onBackPressed()
+            }
+            builderDialog.show()
+        }
+
+    }
+
+    private fun limparFormulario() {
+        editTextDescricaoAtividade.setText("")
+        editTextTipoAtividade.setText("")
+        checkboxZero.isChecked = false
+        editTextDescricaoAtividade.requestFocus()
     }
 
     private fun validarFormulario() : Boolean {
