@@ -8,6 +8,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.aplicativoigor.R
 import com.example.aplicativoigor.adapter.AtividadesAdapter
+import com.example.aplicativoigor.repository.AtividadeRepository
 import kotlinx.android.synthetic.main.toolbar.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -16,11 +17,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        iniciarRecyclerView()
+
 
         insertToolbar()
 
         buttonCadastrarAtividade.setOnClickListener(this)
+    }
+
+    override fun onResume() {
+        iniciarRecyclerView()
+        super.onResume()
     }
 
     override fun onClick(v: View) {
@@ -32,7 +38,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun iniciarRecyclerView() {
         recyclerViewAtividades.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        recyclerViewAtividades.adapter = AtividadesAdapter(Datasource.getAtividades())
+
+        val repo = AtividadeRepository(this)
+        recyclerViewAtividades.adapter = AtividadesAdapter(repo.getAtividades())
     }
 
     private fun insertToolbar(){
