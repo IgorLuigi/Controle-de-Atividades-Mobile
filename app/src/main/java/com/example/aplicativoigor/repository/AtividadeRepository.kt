@@ -65,8 +65,37 @@ class AtividadeRepository(context: Context) {
         return atividades
     }
 
-    fun getAtividade(id: Int){
+    fun getAtividade(id: Int) : Atividade{
 
+        val db = dbHelper.readableDatabase
+
+        val projection = arrayOf(
+            DatabaseDefinition.Atividade.Columns.ID,
+            DatabaseDefinition.Atividade.Columns.DESCRICAO,
+            DatabaseDefinition.Atividade.Columns.PRIORIDADE,
+            DatabaseDefinition.Atividade.Columns.TIPO_ATIVIDADE,
+            DatabaseDefinition.Atividade.Columns.FEITO
+        )
+
+        val selection = "${DatabaseDefinition.Atividade.Columns.ID} = ?"
+
+        val selectionArgs = arrayOf(id.toString())
+
+        val cursor = db.query(DatabaseDefinition.Atividade.TABLE_NAME,
+            projection, selection, selectionArgs, null, null, null)
+
+        var atividade = Atividade()
+
+        if(cursor != null){
+            cursor.moveToNext()
+
+            atividade.id = cursor.getInt(cursor.getColumnIndex(DatabaseDefinition.Atividade.Columns.ID)),
+            atividade.descricao = cursor.getString(cursor.getColumnIndex(DatabaseDefinition.Atividade.Columns.DESCRICAO)),
+            atividade.prioridade = cursor.getFloat(cursor.getColumnIndex(DatabaseDefinition.Atividade.Columns.PRIORIDADE)),
+            atividade.tipoAtividade = cursor.getString(cursor.getColumnIndex(DatabaseDefinition.Atividade.Columns.TIPO_ATIVIDADE)),
+            atividade.feito = cursor.getInt(cursor.getColumnIndex(DatabaseDefinition.Atividade.Columns.FEITO)) == 1
+        }
+        return atividade
     }
 
 }
