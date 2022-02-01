@@ -35,9 +35,18 @@ class AtividadeRepository(context: Context) {
     fun getAtividades() : ArrayList<Atividade>{
 
         val db = dbHelper.readableDatabase
+        
+        val projection = arrayOf(
+            DatabaseDefinition.Atividade.Columns.ID,
+            DatabaseDefinition.Atividade.Columns.DESCRICAO,
+            DatabaseDefinition.Atividade.Columns.PRIORIDADE,
+            DatabaseDefinition.Atividade.Columns.TIPO_ATIVIDADE
+        )
+
+        val sortOrder = "${DatabaseDefinition.Atividade.Columns.DESCRICAO} ASC"
 
         val cursor = db.query(DatabaseDefinition.Atividade.TABLE_NAME,
-        null, null, null, null, null, null)
+        projection, null, null, null, null, sortOrder)
 
 
 
@@ -45,11 +54,10 @@ class AtividadeRepository(context: Context) {
         if(cursor != null){
             while(cursor.moveToNext()){
                 var atividade = Atividade(
-                    cursor.getInt(cursor.getColumnIndex(DatabaseDefinition.Atividade.Columns.ID)),
-                    cursor.getString(cursor.getColumnIndex(DatabaseDefinition.Atividade.Columns.DESCRICAO)),
-                    cursor.getFloat(cursor.getColumnIndex(DatabaseDefinition.Atividade.Columns.PRIORIDADE)),
-                    cursor.getString(cursor.getColumnIndex(DatabaseDefinition.Atividade.Columns.TIPO_ATIVIDADE)),
-                    cursor.getInt(cursor.getColumnIndex(DatabaseDefinition.Atividade.Columns.FEITO)) == 1
+                    id = cursor.getInt(cursor.getColumnIndex(DatabaseDefinition.Atividade.Columns.ID)),
+                    descricao = cursor.getString(cursor.getColumnIndex(DatabaseDefinition.Atividade.Columns.DESCRICAO)),
+                    prioridade = cursor.getFloat(cursor.getColumnIndex(DatabaseDefinition.Atividade.Columns.PRIORIDADE)),
+                    tipoAtividade = cursor.getString(cursor.getColumnIndex(DatabaseDefinition.Atividade.Columns.TIPO_ATIVIDADE))
                 )
                 atividades.add(atividade)
             }
