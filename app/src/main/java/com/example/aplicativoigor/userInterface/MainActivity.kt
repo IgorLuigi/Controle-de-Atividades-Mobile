@@ -8,6 +8,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.aplicativoigor.R
 import com.example.aplicativoigor.adapter.AtividadesAdapter
+import com.example.aplicativoigor.constants.Constants
 import com.example.aplicativoigor.repository.AtividadeRepository
 import kotlinx.android.synthetic.main.toolbar.*
 
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View) {
         if (v.id == R.id.buttonCadastrarAtividade){
             val intent = Intent(this, CadastroAtividadeActivity::class.java)
+            intent.putExtra("operacao", Constants.OPERACAO_NOVO_CADASTRO)
             startActivity(intent)
         }
     }

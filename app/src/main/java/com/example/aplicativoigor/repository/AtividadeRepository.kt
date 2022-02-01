@@ -88,11 +88,10 @@ class AtividadeRepository(context: Context) {
 
         if(cursor != null){
             cursor.moveToNext()
-
-            atividade.id = cursor.getInt(cursor.getColumnIndex(DatabaseDefinition.Atividade.Columns.ID)),
-            atividade.descricao = cursor.getString(cursor.getColumnIndex(DatabaseDefinition.Atividade.Columns.DESCRICAO)),
-            atividade.prioridade = cursor.getFloat(cursor.getColumnIndex(DatabaseDefinition.Atividade.Columns.PRIORIDADE)),
-            atividade.tipoAtividade = cursor.getString(cursor.getColumnIndex(DatabaseDefinition.Atividade.Columns.TIPO_ATIVIDADE)),
+            atividade.id = cursor.getInt(cursor.getColumnIndex(DatabaseDefinition.Atividade.Columns.ID))
+            atividade.descricao = cursor.getString(cursor.getColumnIndex(DatabaseDefinition.Atividade.Columns.DESCRICAO))
+            atividade.prioridade = cursor.getFloat(cursor.getColumnIndex(DatabaseDefinition.Atividade.Columns.PRIORIDADE))
+            atividade.tipoAtividade = cursor.getString(cursor.getColumnIndex(DatabaseDefinition.Atividade.Columns.TIPO_ATIVIDADE))
             atividade.feito = cursor.getInt(cursor.getColumnIndex(DatabaseDefinition.Atividade.Columns.FEITO)) == 1
         }
         return atividade

@@ -1,10 +1,13 @@
 package com.example.aplicativoigor.adapter
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.aplicativoigor.model.Atividade
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aplicativoigor.R
+import com.example.aplicativoigor.constants.Constants
+import com.example.aplicativoigor.userInterface.CadastroAtividadeActivity
 import kotlinx.android.synthetic.main.layout_lista_atividades.view.*
 
 class AtividadesAdapter(var listaAtividades: ArrayList<Atividade>) : RecyclerView.Adapter<AtividadesAdapter.AtividadeViewHolder>() {
@@ -30,6 +33,13 @@ class AtividadesAdapter(var listaAtividades: ArrayList<Atividade>) : RecyclerVie
             itemView.textNomeDaAtividade.text = atividade.descricao
             itemView.textTipoDaAtividade.text = atividade.tipoAtividade
             itemView.valorPrioridade.rating = atividade.prioridade
+
+            itemView.buttonDetalhes.setOnClickListener{
+                val intent = Intent(itemView.context, CadastroAtividadeActivity::class.java)
+                intent.putExtra("opercao", Constants.OPERACAO_CONSULTAR)
+                intent.putExtra("id", atividade.id)
+                itemView.context.startActivity(intent)
+            }
         }
     }
 }

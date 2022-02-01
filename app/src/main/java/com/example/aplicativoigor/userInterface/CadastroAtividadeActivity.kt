@@ -23,7 +23,7 @@ class CadastroAtividadeActivity : AppCompatActivity() {
 
     private fun insertToolbar(){
         setSupportActionBar(toolbar)
-        supportActionBar!!.title = "Nova Atividade"
+        supportActionBar!!.title = intent.getStringExtra("operacao")
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 
