@@ -7,9 +7,11 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.aplicativoigor.R
+import com.example.aplicativoigor.constants.Constants
 import com.example.aplicativoigor.model.Atividade
 import com.example.aplicativoigor.repository.AtividadeRepository
 import kotlinx.android.synthetic.main.activity_cadastro_atividade.*
+import kotlinx.android.synthetic.main.layout_lista_atividades.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 class CadastroAtividadeActivity : AppCompatActivity() {
@@ -19,6 +21,24 @@ class CadastroAtividadeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_cadastro_atividade)
 
         insertToolbar()
+
+        if (intent.getStringExtra("operacao") != Constants.OPERACAO_NOVO_CADASTRO){
+            preencherFormulario()
+        }
+    }
+
+    private fun preencherFormulario() {
+        var atividade = Atividade()
+        var id = intent.getIntExtra("id", 0)
+
+        val repository = AtividadeRepository(this)
+
+        atividade = repository.getAtividade(id)
+
+        editTextDescricaoAtividade.setText(atividade.descricao)
+        editTextTipoAtividade.setText(atividade.tipoAtividade)
+        checkboxZero.isChecked = atividade.feito
+        ratingBarPrioridadeAtividade.rating = atividade.prioridade
     }
 
     private fun insertToolbar(){
