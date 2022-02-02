@@ -27,12 +27,12 @@ class AtividadesAdapter(var listaAtividades: ArrayList<Atividade>) : RecyclerVie
 
     override fun onBindViewHolder(holder: AtividadeViewHolder, position: Int) {
         val atividade = listaAtividades[position]
-        holder.bind(atividade)
+        holder.bind(atividade, position)
     }
 
 
-    class AtividadeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        fun bind(atividade: Atividade) {
+    inner class AtividadeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+        fun bind(atividade: Atividade, position: Int) {
             itemView.textNomeDaAtividade.text = atividade.descricao
             itemView.textTipoDaAtividade.text = atividade.tipoAtividade
             itemView.valorPrioridade.rating = atividade.prioridade
@@ -52,7 +52,9 @@ class AtividadesAdapter(var listaAtividades: ArrayList<Atividade>) : RecyclerVie
                     .setPositiveButton("SIM"){dialog, which ->
                         val repo = AtividadeRepository(itemView.context)
                         repo.delete(atividade.id)
-                        Tost.makeText(itemView.context, "Atividade escluída com sucesso!", Toast.LENGTH_SHORT).show()
+                        listaAtividades.removeAt(position)
+                        notifyDataSetChanged()
+                        Toast.makeText(itemView.context, "Atividade escluída com sucesso!", Toast.LENGTH_SHORT).show()
                     }
                     .setNegativeButton("NÃO"){dialog, which ->
 
