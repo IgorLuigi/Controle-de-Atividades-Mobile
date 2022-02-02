@@ -28,8 +28,17 @@ class AtividadeRepository(context: Context) {
 
     }
 
-    fun delete(id: Int){
+    fun delete(id: Int) : Int{
+        val db = dbHelper.writableDatabase
 
+        val selection = "${DatabaseDefinition.Atividade.Columns.ID} = ?"
+
+        val selectionArgs = arrayOf(id.toString())
+
+        val deletedRows = db.delete(
+            DatabaseDefinition.Atividade.TABLE_NAME, selection, selectionArgs)
+
+        return deletedRows
     }
 
     fun getAtividades() : ArrayList<Atividade>{
