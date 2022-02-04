@@ -16,11 +16,15 @@ import kotlinx.android.synthetic.main.toolbar.*
 
 class CadastroAtividadeActivity : AppCompatActivity() {
 
+    private lateinit var operacao: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cadastro_atividade)
 
         insertToolbar()
+
+        operacao = intent.getStringExtra("operacao")
 
         if (intent.getStringExtra("operacao") != Constants.OPERACAO_NOVO_CADASTRO){
             preencherFormulario()
@@ -59,9 +63,10 @@ class CadastroAtividadeActivity : AppCompatActivity() {
                 alert()
             }
             R.id.menu_salvar -> {
-                if (validarFormulario()){
+                if (validarFormulario() && operacao == Constants.OPERACAO_NOVO_CADASTRO ){
                     salvarAtividade()
-
+                } else {
+                    atualizarAtividade()
                 }
             }
             else -> {
@@ -95,6 +100,33 @@ class CadastroAtividadeActivity : AppCompatActivity() {
             builderDialog.setNegativeButton("Não") { _, _ ->
                 onBackPressed()
             }
+            builderDialog.show()
+        }
+
+    }
+
+    private fun atualizarAtividade() {
+        val atividade = Atividade(
+            id = intent.getIntExtra("id", 0),
+            descricao = editTextDescricaoAtividade.text.toString(),
+            prioridade = ratingBarPrioridadeAtividade.rating,
+            tipoAtividade = editTextTipoAtividade.text.toString(),
+            feito = checkboxZero.isChecked
+        )
+
+        val repo = AtividadeRepository(this)
+        val count = repo.save(atividade)
+
+        if(count > 0){
+            val builderDialog = AlertDialog.Builder(this)
+            builderDialog.setTitle("Sucesso!")
+            builderDialog.setMessage("Atividade alterada com sucesso!")
+            builderDialog.setIcon(R.drawable.ic_done_green_24dp)
+
+            builderDialog.setPositiveButton("Feito") { _, _ ->
+                onBackPressed()
+            }
+
             builderDialog.show()
         }
 

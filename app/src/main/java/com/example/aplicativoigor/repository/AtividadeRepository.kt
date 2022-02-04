@@ -24,8 +24,28 @@ class AtividadeRepository(context: Context) {
         return id.toInt()
     }
 
-    fun update(atividade: Atividade){
+    fun update(atividade: Atividade): Int {
+        val db = dbHelper.writableDatabase
 
+        val valores = ContentValues().apply{
+            put(DatabaseDefinition.Atividade.Columns.DESCRICAO, atividade.descricao)
+            put(DatabaseDefinition.Atividade.Columns.PRIORIDADE, atividade.prioridade)
+            put(DatabaseDefinition.Atividade.Columns.TIPO_ATIVIDADE, atividade.tipoAtividade)
+            put(DatabaseDefinition.Atividade.Columns.FEITO, atividade.feito)
+        }
+
+        val selection = "${DatabaseDefinition.Atividade.Columns.ID} = ?"
+
+        val selectionArgs = arrayOf(atividade.id.toString())
+
+        val count = db.update(
+            DatabaseDefinition.Atividade.TABLE_NAME,
+            valores,
+            selection,
+            selectionArgs
+        )
+
+        return count
     }
 
     fun delete(id: Int) : Int{
