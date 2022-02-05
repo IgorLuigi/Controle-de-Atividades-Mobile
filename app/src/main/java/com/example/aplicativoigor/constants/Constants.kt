@@ -1,6 +1,6 @@
 package com.example.aplicativoigor.constants
 
-class Constants {
+class Constants{
 
     companion object {
         const val OPERACAO_NOVO_CADASTRO = "Nova Atividade"

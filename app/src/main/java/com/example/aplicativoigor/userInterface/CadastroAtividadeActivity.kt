@@ -24,9 +24,9 @@ class CadastroAtividadeActivity : AppCompatActivity() {
 
         insertToolbar()
 
-        operacao = intent.getStringExtra("operacao")
+        operacao = intent.getStringExtra("operacao") ?: ""
 
-        if (intent.getStringExtra("operacao") != Constants.OPERACAO_NOVO_CADASTRO){
+        if (operacao != Constants.OPERACAO_NOVO_CADASTRO){
             preencherFormulario()
         }
     }
@@ -115,7 +115,7 @@ class CadastroAtividadeActivity : AppCompatActivity() {
         )
 
         val repo = AtividadeRepository(this)
-        val count = repo.save(atividade)
+        val count = repo.update(atividade)
 
         if(count > 0){
             val builderDialog = AlertDialog.Builder(this)
